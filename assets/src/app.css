@@ -1,0 +1,28 @@
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+header {
+  padding: 1rem;
+}
+
+nav ul {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #333;
+}
+
+.nav-link:hover {
+  text-decoration: underline;
+}
+
+main {
+  padding: 1rem;
+}
