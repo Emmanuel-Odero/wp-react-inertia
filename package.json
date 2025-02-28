@@ -1,0 +1,30 @@
+{
+  "name": "wordpress-inertia-react-starter-theme",
+  "version": "1.0.0",
+  "description": "A WordPress starter theme using Inertia.js and React for modern frontend development.",
+  "author": "Emmanuel Odero <emmanuelodero@techmates.team>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Emmanuel-Odero/wp-react-inertia.git"
+  },
+  "homepage": "https://github.com/Emmanuel-Odero/wp-react-inertia.git",
+  "bugs": {
+    "url": "https://github.com/Emmanuel-Odero/wp-react-inertia.git/issues"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "clean": "rm -rf assets/build"
+  },
+  "dependencies": {
+    "@inertiajs/react": "^1.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "vite": "^5.0.0"
+  }
+}

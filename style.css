@@ -1,0 +1,35 @@
+/*
+ Theme Name:   wp-react-inertia Theme
+ Theme URI:    https://github.com/Emmanuel-Odero/wp-react-inertia.git
+ Author:       Emmanuel Odero
+ Author URI:   https://github.com/Emmanuel-Odero
+ Description:  A lightweight WordPress starter theme integrating Inertia.js with React for a modern SPA-like experience.
+ Version:      1.0.0
+ License:      MIT
+ License URI:  https://opensource.org/licenses/MIT
+ Text Domain:  wordpress-inertia-react-starter
+ Tags:         inertiajs, react, spa, modern, starter
+
+ This theme uses Inertia.js and React for frontend rendering, with Vite as the build tool.
+*/
+
+/* Minimal reset for consistency */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Ensure the #app container takes full height */
+#app {
+    min-height: 100vh;
+}
+
+/* Optional: Basic styling for non-React elements */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0 0 1rem 0;
+}
+
+p {
+    margin: 0 0 1rem 0;
+}
