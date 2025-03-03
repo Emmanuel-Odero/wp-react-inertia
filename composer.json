@@ -1,0 +1,17 @@
+{
+  "name": "emmanuel-odero/aurelis",
+  "description": "A modern WordPress SPA theme built with Inertia.js",
+  "type": "wordpress-theme",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "Emmanuel Odero",
+      "email": "emmanuelodero808@gmail.com"
+    }
+  ],
+  "require": {
+    "composer/installers": "^1.0 || ^2.0"
+  },
+  "keywords": ["wordpress", "theme", "inertia", "spa"],
+  "minimum-stability": "stable"
+}
