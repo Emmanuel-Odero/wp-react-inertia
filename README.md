@@ -27,3 +27,27 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 ## Usage
 - Create pages/posts in WordPress admin.
 - Menus are rendered dynamically via the "Primary" location.
+
+## Folder Structure
+wordpress-inertia-react-starter/
+    ├── assets/
+    │   ├── src/
+    │   │   ├── components/
+    │   │   │   └── Layout.jsx
+    │   │   ├── pages/
+    │   │   │   └── Content.jsx
+    │   │   ├── app.jsx
+    │   │   └── app.css
+    │   └── build/ (ignored)
+    ├── lib/
+    │   └── inertia/
+    │       └── Inertia.php
+    ├── functions.php
+    ├── index.php
+    ├── style.css
+    ├── package.json
+    ├── vite.config.js
+    ├── .gitignore
+    ├── README.md
+    ├── LICENSE
+    └── CONTRIBUTING.md
