@@ -5,20 +5,16 @@ import Layout from './components/Layout';
 
 createInertiaApp({
   resolve: (name) => {
-    const pages = import.meta.glob('./pages/*.jsx', { eager: true });
-    console.log('Available pages:', Object.keys(pages));
-    console.log('Requested page:', `./pages/${name}.jsx`);
+    const pages = import.meta.glob('./pages/**/*.jsx', { eager: true });
     
-    const page = pages[`./pages/${name}.jsx`] || pages[`./pages/index.jsx`]; // Fallback to index
+    const pagePath = `./pages/${name}.jsx`;
+    const page = pages[pagePath] || pages[`./pages/index.jsx`] || pages[`./pages/404.jsx`]; // Added 404 fallback
+    
     if (!page) {
-      throw new Error(`Page not found: ${name}`);
+      throw new Error(`Page not found: ${name}. No fallback available`);
     }
     
     const component = page.default;
-    if (!component) {
-      throw new Error(`No default export in ${name}.jsx`);
-    }
-
     component.layout = (page) => <Layout {...page.props}>{page}</Layout>;
     return component;
   },

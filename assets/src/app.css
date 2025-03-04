@@ -26,3 +26,7 @@ nav ul {
 main {
   padding: 1rem;
 }
+.nav-link.active {
+  text-decoration: underline;
+  /* Add any additional active styles here */
+}

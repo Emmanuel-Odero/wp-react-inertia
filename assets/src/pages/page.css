@@ -1,0 +1,6 @@
+/* pages/index.module.css */
+.pageContainer {
+  background-color: red;
+  padding: 20px;
+  border: 2px solid blue;
+}
