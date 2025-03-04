@@ -1,7 +1,8 @@
-import React from 'react';
-import { Link } from '@inertiajs/react';
+import React from "react";
+import { Link, usePage } from "@inertiajs/react";
 
 export default function Layout({ children, site, menu = [] }) {
+  const { url } = usePage(); 
   return (
     <div className="layout">
       <header>
@@ -9,13 +10,23 @@ export default function Layout({ children, site, menu = [] }) {
         <nav>
           <ul>
             {menu.length > 0 ? (
-              menu.map((item) => (
-                <li key={item.url}>
-                  <Link href={item.url} className="nav-link">
-                    {item.title}
-                  </Link>
-                </li>
-              ))
+              menu.map((item) => {
+                const itemPath = new URL(item.url, window.location.origin)
+                  .pathname;
+
+                return (
+                  <li key={item.url}>
+                    <Link
+                      href={item.url}
+                      className={
+                        itemPath === url ? "nav-link active" : "nav-link"
+                      }
+                    >
+                      {item.title}
+                    </Link>
+                  </li>
+                );
+              })
             ) : (
               <li>No menu items available</li>
             )}
