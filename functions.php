@@ -14,10 +14,10 @@ add_action('after_setup_theme', function () {
 });
 
 // Share global data and handle routing
+// Handle routing
 add_action('template_redirect', function () {
     if (!is_admin()) {
         $menu_data = get_main_menu();
-        error_log('Menu data: ' . print_r($menu_data, true));
         Inertia::share([
             'site' => [
                 'name' => get_bloginfo('name'),
@@ -26,21 +26,11 @@ add_action('template_redirect', function () {
             'menu' => $menu_data,
         ]);
 
-        if (is_page() || is_single()) {
-            Inertia::render('Content', get_content_data());
-        } elseif (is_home()) {
-            $posts = get_posts(['numberposts' => 1]);
-            if (!empty($posts)) {
-                global $post;
-                $post = $posts[0];
-                setup_postdata($post);
-                Inertia::render('Content', get_content_data());
-            }
-        } else {
-            wp_die('404 - Not Found');
-        }
+        // Always load Index.jsx as the main page
+        Inertia::render('index', get_content_data());
     }
 });
+
 // Enqueue frontend assets
 add_action('wp_enqueue_scripts', function () {
     $manifest_path = __DIR__ . '/assets/build/.vite/manifest.json';

@@ -2,7 +2,7 @@
 require_once __DIR__ . '/lib/inertia/Inertia.php';
 use Inertia\Inertia;
 
-$component = 'Content';
+$component = 'index'; // Always load index.jsx
 $props = get_content_data();
 $shared = [
     'site' => [
@@ -12,18 +12,6 @@ $shared = [
     'menu' => get_main_menu(),
 ];
 
-if (!is_page() && !is_single() && is_home()) {
-    $posts = get_posts(['numberposts' => 1]);
-    if (!empty($posts)) {
-        global $post;
-        $post = $posts[0];
-        setup_postdata($post);
-        $props = get_content_data();
-    }
-} elseif (!is_page() && !is_single() && !is_home()) {
-    $component = 'Content'; // Could use a NotFound if you add it later
-    $props = ['title' => '404', 'content' => 'Not Found'];
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
