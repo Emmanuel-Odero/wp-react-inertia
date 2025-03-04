@@ -16,11 +16,12 @@ nav ul {
 
 .nav-link {
   text-decoration: none;
-  color: #333;
+  color: #000;
 }
 
-.nav-link:hover {
-  text-decoration: underline;
+.active {
+  font-weight: bold;
+  border-bottom: 2px solid;
 }
 
 main {
