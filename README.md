@@ -15,7 +15,7 @@ This project is open-source under the [MIT License](LICENSE).
 - Vite for fast builds.
 
 ## Installation
-1. Clone the repo: `git clone https://github.com/yourusername/wordpress-inertia-react-starter.git`
+1. Clone the repo: `git clone https://github.com/Emmanuel-Odero/wp-react-inertia.git`
 2. Install PHP dependencies: `composer install` (if you add any).
 3. Install JS dependencies: `npm install`
 4. Build assets: `npm run build`
