@@ -13,5 +13,10 @@
     "composer/installers": "^1.0 || ^2.0"
   },
   "keywords": ["wordpress", "theme", "inertia", "spa"],
-  "minimum-stability": "stable"
+  "minimum-stability": "stable",
+  "config": {
+    "allow-plugins": {
+      "composer/installers": true
+    }
+  }
 }

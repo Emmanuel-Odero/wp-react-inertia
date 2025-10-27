@@ -46,7 +46,12 @@ add_action('wp_enqueue_scripts', function () {
             wp_enqueue_style('inertia-react', get_template_directory_uri() . '/assets/build/' . $css_file, [], null);
         }
     } else {
-        error_log('Vite manifest not found. Run `npm run build`.');
+        // Dev fallback: load Vite dev server (HMR). Make sure `npm run dev` is running.
+        add_action('wp_footer', function () {
+            echo '<script type="module" src="http://localhost:5173/@vite/client"></script>';
+            echo '<script type="module" src="http://localhost:5173/assets/src/app.jsx"></script>';
+        }, 100);
+        error_log('Vite manifest not found. Running in dev mode (loading assets from http://localhost:5173).');
     }
 });
 
