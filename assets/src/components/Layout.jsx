@@ -28,7 +28,7 @@ export default function Layout({ children, site, menu = [] }) {
                 );
               })
             ) : (
-              <li>No menu items available</li>
+              <li>is </li>
             )}
           </ul>
         </nav>

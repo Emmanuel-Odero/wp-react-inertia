@@ -33,36 +33,63 @@ add_action('template_redirect', function () {
 
 // Enqueue frontend assets
 add_action('wp_enqueue_scripts', function () {
-    $manifest_path = __DIR__ . '/assets/build/.vite/manifest.json';
-    if (file_exists($manifest_path)) {
-        $manifest = json_decode(file_get_contents($manifest_path), true);
-        $js_file = $manifest['assets/src/app.jsx']['file'] ?? null;
-        $css_file = $manifest['assets/src/app.jsx']['css'][0] ?? null;
-
-        if ($js_file) {
-            wp_enqueue_script('inertia-react', get_template_directory_uri() . '/assets/build/' . $js_file, [], null, true);
-        }
-        if ($css_file) {
-            wp_enqueue_style('inertia-react', get_template_directory_uri() . '/assets/build/' . $css_file, [], null);
-        }
-    } else {
-        // Dev fallback: load Vite dev server (HMR). Make sure `npm run dev` is running.
+    $is_development = !file_exists(__DIR__ . '/assets/build/.vite/manifest.json');
+    
+    if ($is_development) {
+        // Development mode
+        add_action('wp_head', function () {
+            echo '
+            <script type="module">
+                import RefreshRuntime from "http://localhost:5174/@react-refresh"
+                RefreshRuntime.injectIntoGlobalHook(window)
+                window.$RefreshReg$ = () => {}
+                window.$RefreshSig$ = () => (type) => type
+                window.__vite_plugin_react_preamble_installed__ = true
+            </script>';
+        }, 1);
+        
         add_action('wp_footer', function () {
-            echo '<script type="module" src="http://localhost:5173/@vite/client"></script>';
-            echo '<script type="module" src="http://localhost:5173/assets/src/app.jsx"></script>';
-        }, 100);
-        error_log('Vite manifest not found. Running in dev mode (loading assets from http://localhost:5173).');
+            echo '<script type="module" src="http://localhost:5174/@vite/client"></script>';
+            echo '<script type="module" src="http://localhost:5174/assets/src/app.jsx"></script>';
+        }, 1);
+    } else {
+        // Production mode
+        $manifest_path = __DIR__ . '/assets/build/.vite/manifest.json';
+        if (file_exists($manifest_path)) {
+            // Production mode
+            $manifest = json_decode(file_get_contents($manifest_path), true);
+            $js_file = $manifest['assets/src/app.jsx']['file'] ?? null;
+            $css_file = $manifest['assets/src/app.jsx']['css'][0] ?? null;
+
+            if ($js_file) {
+                wp_enqueue_script('inertia-react', get_template_directory_uri() . '/assets/build/' . $js_file, [], null, true);
+            }
+            if ($css_file) {
+                wp_enqueue_style('inertia-react', get_template_directory_uri() . '/assets/build/' . $css_file, [], null);
+            }
+        }
     }
 });
 
 // Helper: Get current page/post data
 function get_content_data() {
     $post = get_queried_object();
+
+    // Return safe defaults when no queried object (prevents "Attempt to read property on null")
+    if (!$post || !is_object($post) || !isset($post->post_title)) {
+        return [
+            'title'   => get_bloginfo('name'),
+            'content' => '',
+            'slug'    => '',
+            'type'    => '',
+        ];
+    }
+
     return [
-        'title' => $post->post_title,
+        'title'   => $post->post_title,
         'content' => apply_filters('the_content', $post->post_content),
-        'slug' => $post->post_name,
-        'type' => $post->post_type,
+        'slug'    => $post->post_name,
+        'type'    => $post->post_type,
     ];
 }
 

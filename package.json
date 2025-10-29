@@ -16,7 +16,8 @@
     "dev": "vite",
     "build": "vite build",
     "watch": "vite build --watch",
-    "clean": "rm -rf assets/build"
+    "clean": "rm -rf assets/build",
+    "preview" : "vite preview"
   },
   "dependencies": {
     "@inertiajs/react": "^1.0.0",
